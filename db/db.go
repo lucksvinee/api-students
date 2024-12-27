@@ -11,11 +11,11 @@ import (
   
 	type Student struct {
 		gorm.Model
-		Name string
-		CPF int
-		Email string
-		Age int
-		Active bool
+		Name string `json:"name"`
+		CPF int `json:"cpf"`
+		Email string `json:"email"`
+		Age int `json:"age"`
+		Active bool `json:"registration"`
 	}
   func Init() *gorm.DB {
 	dbPath := "/home/hitsugaya/Área de trabalho/api-students/student.db"
@@ -33,17 +33,9 @@ import (
 	return db
   }
 
-  func AddStudent(){
+  func AddStudent(student Student){
 	db := Init()
 
-	student := Student{
-		Name: "Lucas Inacio",
-		CPF: 35674513324,
-		Email: "dsdadjuw@example.com",
-		Age: 29,
-		Active: true,
-	}
-	
 	if result := db.Create(&student); result.Error != nil {
 		fmt.Println("Error creating student:")
 	}  else {
