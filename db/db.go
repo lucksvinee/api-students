@@ -33,13 +33,12 @@ import (
 	return db
   }
 
-  func AddStudent(student Student){
+  func AddStudent(student Student) error {
 	db := Init()
 
 	if result := db.Create(&student); result.Error != nil {
-		fmt.Println("Error creating student:")
-	}  else {
-        fmt.Println("Student created:", student)
-    }
-	
+		return result.Error
+	}  
+        fmt.Println("Student created:")
+		return nil
   }
